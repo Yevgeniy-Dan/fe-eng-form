@@ -1,0 +1,115 @@
+<mat-card class="card-container">
+  <mat-card-header>
+    <mat-card-title>Frontend Engineer Form</mat-card-title>
+  </mat-card-header>
+  <form [formGroup]="engineerForm" (ngSubmit)="onSubmit()">
+    <mat-card-content>
+      <mat-form-field class="full-width">
+        <mat-label>Name:</mat-label>
+        <input matInput formControlName="name" />
+        <mat-error
+          *ngIf="
+            engineerForm.get('name')?.hasError('minlength') &&
+            !engineerForm.get('name')?.hasError('required')
+          "
+        >
+          The name length must be from 3 to 30 characters
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Last Name:</mat-label>
+        <input matInput formControlName="lastname" />
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Date Of Birth:</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="birthDate" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Technology</mat-label>
+        <mat-select
+          formControlName="technology"
+          (valueChange)="enableVersions()"
+        >
+          <mat-option
+            *ngFor="let technology of technologies"
+            [value]="technology"
+            >{{ technology }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Technology Version</mat-label>
+        <mat-select formControlName="techVersion">
+          <mat-option
+            *ngFor="
+              let version of techVersions[engineerForm.get('technology')?.value]
+            "
+            [value]="version"
+            >{{ version }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+
+      <div formArrayName="hobbies" class="hobbie-container">
+        <button mat-raised-button type="button" (click)="addHobbie()">
+          +Add another hobbie
+        </button>
+
+        <mat-form-field
+          class="full-width"
+          *ngFor="let hobbie of hobbies.controls; let i = index"
+        >
+          <mat-label>Hobbie:</mat-label>
+          <input
+            matInput
+            id="hobbie-{{ i }}"
+            formControlName="name"
+            formControlName="{{ i }}"
+          />
+          <mat-error *ngIf="hobbie?.hasError('required')">
+            Complete <strong>at least one</strong> hobby
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field class="full-width">
+        <mat-label>Email:</mat-label>
+        <input
+          matInput
+          formControlName="email"
+          placeholder="Ex. pat@example.com"
+        />
+        <mat-error
+          *ngIf="
+            engineerForm.get('email')?.hasError('email') &&
+            !engineerForm.get('email')?.hasError('required')
+          "
+        >
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="engineerForm.get('email')?.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!engineerForm.valid"
+      >
+        Submit
+      </button>
+    </mat-card-content>
+  </form>
+</mat-card>
