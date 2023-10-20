@@ -4,7 +4,7 @@
   </mat-card-header>
   <form [formGroup]="engineerForm" (ngSubmit)="addUser()">
     <mat-card-content>
-      <mat-form-field class="full-width">
+      <mat-form-field class="full-width" hideRequiredMarker>
         <mat-label>Name:</mat-label>
         <input matInput formControlName="name" />
         <mat-error
@@ -17,12 +17,12 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field class="full-width">
+      <mat-form-field class="full-width" hideRequiredMarker>
         <mat-label>Last Name:</mat-label>
         <input matInput formControlName="lastname" />
       </mat-form-field>
 
-      <mat-form-field class="full-width">
+      <mat-form-field class="full-width" hideRequiredMarker>
         <mat-label>Date Of Birth:</mat-label>
         <input matInput [matDatepicker]="picker" formControlName="birthDate" />
         <mat-hint>MM/DD/YYYY</mat-hint>
@@ -33,7 +33,7 @@
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
-      <mat-form-field class="full-width">
+      <mat-form-field class="full-width" hideRequiredMarker>
         <mat-label>Technology</mat-label>
         <mat-select
           formControlName="technology"
@@ -47,7 +47,7 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field class="full-width">
+      <mat-form-field class="full-width" hideRequiredMarker>
         <mat-label>Technology Version</mat-label>
         <mat-select formControlName="techVersion">
           <mat-option
@@ -67,6 +67,7 @@
 
         <mat-form-field
           class="full-width"
+          hideRequiredMarker
           *ngFor="let hobbie of hobbies.controls; let i = index"
         >
           <mat-label>Hobbie:</mat-label>
@@ -76,13 +77,20 @@
             formControlName="name"
             formControlName="{{ i }}"
           />
-          <mat-error *ngIf="hobbie?.hasError('required')">
-            Complete <strong>at least one</strong> hobby
-          </mat-error>
+          <button
+            type="button"
+            style="margin-bottom: 0"
+            *ngIf="i >= 1"
+            mat-icon-button
+            matSuffix
+            (click)="removeHobbie(i)"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
         </mat-form-field>
       </div>
 
-      <mat-form-field class="full-width">
+      <mat-form-field class="full-width" hideRequiredMarker>
         <mat-label>Email:</mat-label>
         <input
           matInput
@@ -99,6 +107,9 @@
         </mat-error>
         <mat-error *ngIf="engineerForm.get('email')?.hasError('required')">
           Email is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="engineerForm.get('email')?.hasError('isExists')">
+          {{ engineerForm.get("email")?.getError("isExists") }}
         </mat-error>
       </mat-form-field>
 

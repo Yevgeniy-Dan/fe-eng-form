@@ -1,6 +1,6 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { User } from '../User';
@@ -15,19 +15,23 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class UserService {
-  private apiUrl = 'http://localhost:5000/users';
+  public apiUrl = 'http://localhost:5000/users';
 
   constructor(private http: HttpClient) {}
 
-  getUsers(): Observable<User[]> {
+  /**Get Users Function */
+  public getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.apiUrl);
   }
 
-  addUser(user: User): Observable<User> {
+  /**Add User Function */
+  public addUser(user: User): Observable<User> {
     return this.http.post<User>(this.apiUrl, user, httpOptions);
   }
 
-  private isEmailExists(email: string): Observable<boolean> {
+  /**The function makes a request to get users
+   *  and then finds them who have the same email */
+  public isEmailExists(email: string): Observable<boolean> {
     return this.http
       .get<User[]>(this.apiUrl)
       .pipe(map((users) => users.some((user) => user.email === email)));
