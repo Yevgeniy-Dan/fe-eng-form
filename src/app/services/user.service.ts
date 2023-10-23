@@ -5,21 +5,25 @@ import { map } from 'rxjs/operators';
 
 import { User } from '../models/User';
 
-const httpOptions = {
+const httpOptions: { headers: HttpHeaders } = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
   }),
 };
 
+/**A service for managing user-related HTTP requests */
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  apiUrl = 'http://localhost:5000/users';
+  /** api url server address
+   * the server for local development is started with the `npm run server` command
+   */
+  private apiUrl: string = 'http://localhost:5000/users';
 
   constructor(private http: HttpClient) {}
 
-  /**Get the users from server */
+  /**Get the list of users from server */
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.apiUrl);
   }
