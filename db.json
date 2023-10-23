@@ -8,7 +8,11 @@
       "technology": "Angular",
       "techVersion": "v12.0.0",
       "email": "johndoe@example.com",
-      "hobbies": ["Cycling", "Hiking", "Cooking"]
+      "hobbies": [
+        "Cycling",
+        "Hiking",
+        "Cooking"
+      ]
     },
     {
       "id": "2",
@@ -18,7 +22,9 @@
       "technology": "React",
       "techVersion": "v17.0.0",
       "email": " test@test.test",
-      "hobbies": ["Painting"]
+      "hobbies": [
+        "Painting"
+      ]
     },
     {
       "id": "3",
@@ -28,7 +34,36 @@
       "technology": "Vue",
       "techVersion": "v3.0.0",
       "email": "michael@example.com",
-      "hobbies": ["Skiing", "Photography"]
+      "hobbies": [
+        "Skiing",
+        "Photography"
+      ]
+    },
+    {
+      "name": "Yevheni",
+      "lastname": "Danoi",
+      "birthDate": "2002-02-12T22:00:00.000Z",
+      "technology": "react",
+      "techVersion": "3.2.4",
+      "email": "sdf@df",
+      "hobbies": [
+        "ASD",
+        "ASD"
+      ],
+      "id": "oqUP2uU"
+    },
+    {
+      "name": "asd",
+      "lastname": "asd",
+      "birthDate": "2023-10-16T21:00:00.000Z",
+      "technology": "angular",
+      "techVersion": "1.1.1",
+      "email": "asdf@sdf",
+      "hobbies": [
+        "asdf",
+        "adsf"
+      ],
+      "id": "_z4y9WR"
     }
   ]
 }

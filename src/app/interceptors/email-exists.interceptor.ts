@@ -11,6 +11,7 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+
 import { UserService } from '../services/user.service';
 
 @Injectable()

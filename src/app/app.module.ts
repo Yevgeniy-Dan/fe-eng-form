@@ -10,11 +10,11 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EngineerFormComponent } from './components/form/engineer-form.component';
-import { EmailExistsInterceptor } from './http/email-exists.interceptor';
+import { EmailExistsInterceptor } from './interceptors/email-exists.interceptor';
 
 @NgModule({
   declarations: [AppComponent, EngineerFormComponent],

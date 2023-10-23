@@ -2,7 +2,7 @@
   <mat-card-header>
     <mat-card-title>Frontend Engineer Form</mat-card-title>
   </mat-card-header>
-  <form [formGroup]="engineerForm" (ngSubmit)="addUser()">
+  <form [formGroup]="engineerForm" (ngSubmit)="addUser()" #myForm="ngForm">
     <mat-card-content>
       <mat-form-field class="full-width" hideRequiredMarker>
         <mat-label>Name:</mat-label>
