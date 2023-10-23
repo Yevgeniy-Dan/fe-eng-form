@@ -29,14 +29,19 @@ export class UserService {
   }
 
   /**Add the user to db
-   * @param user contains user data according to the interface
+   * @param user  - user data
+   * @returns {Observable<User>} - observable that emits the added user data
    */
   addUser(user: User): Observable<User> {
     return this.http.post<User>(this.apiUrl, user, httpOptions);
   }
 
   /**The function makes a request to get users
-   *  and then finds them who have the same email */
+   *  and then finds them who have the same email
+   *
+   * @param email - user email
+   * @returns {Observable<boolean>} - `true` if the email exists, `false` otherwise.
+   *  */
   isEmailExists(email: string): Observable<boolean> {
     return this.http
       .get<User[]>(this.apiUrl)

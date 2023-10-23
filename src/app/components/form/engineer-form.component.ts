@@ -17,6 +17,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./engineer-form.component.css'],
 })
 export class EngineerFormComponent {
+  /** reference to the form container html element */
   @ViewChild('myForm', { static: false }) formDirective?: FormGroupDirective;
   /** Array of technology choices */
   technologies: string[] = ['angular', 'react', 'vue'];
@@ -46,12 +47,12 @@ export class EngineerFormComponent {
 
   constructor(private fb: FormBuilder, private userService: UserService) {}
 
-  /**Getter for the 'hobbies' FormArray */
+  /**Getter used for the 'hobbies' items */
   get hobbies(): FormArray {
     return this.engineerForm.get('hobbies') as FormArray;
   }
 
-  /**Add a new hobby  to the 'hobbies' */
+  /**The method adds a new hobby to the hobby array */
   addHobbie(): void {
     this.hobbies.push(this.fb.control('', Validators.required));
   }
