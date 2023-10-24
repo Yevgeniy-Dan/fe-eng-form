@@ -14,7 +14,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { EngineerFormComponent } from './components/form/engineer-form.component';
-import { EmailExistsInterceptor } from './interceptors/email-exists.interceptor';
 
 @NgModule({
   declarations: [AppComponent, EngineerFormComponent],
@@ -32,13 +31,7 @@ import { EmailExistsInterceptor } from './interceptors/email-exists.interceptor'
     MatButtonModule,
     MatIconModule,
   ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: EmailExistsInterceptor,
-      multi: true,
-    },
-  ],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

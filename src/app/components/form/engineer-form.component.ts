@@ -7,6 +7,7 @@ import {
   NgForm,
 } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { Observable, first, of } from 'rxjs';
 
 import { UserService } from 'src/app/services/user.service';
 
@@ -72,15 +73,27 @@ export class EngineerFormComponent {
 
   /**Add a user by sending the form data to the json-server API */
   addUser(): void {
-    this.userService.addUser(this.engineerForm.value).subscribe({
-      next: (): void => {
-        // reset form to initial state
-        this.formDirective?.resetForm();
-        this.resetHobbiesToInitialState();
-      },
-      error: (err): void =>
-        this.engineerForm.get('email')?.setErrors({ isExists: err.message }),
-    });
+    const email = this.engineerForm.get('email')?.value;
+    this.isEmailExist(email)
+      .pipe(first())
+      .subscribe((isExists) => {
+        if (isExists) {
+          this.engineerForm
+            .get('email')
+            ?.setErrors({
+              isExists: 'User with the same email already exists.',
+            });
+        } else {
+          this.userService
+            .addUser(this.engineerForm.value)
+            .pipe(first())
+            .subscribe(() => {
+              // reset form to initial state
+              this.formDirective?.resetForm();
+              this.resetHobbiesToInitialState();
+            });
+        }
+      });
   }
 
   /**Resets the 'hobbies' section of the form to its initial state */
@@ -88,5 +101,11 @@ export class EngineerFormComponent {
     this.engineerForm = this.fb.group({
       hobbies: this.fb.array([this.fb.control('', Validators.required)]),
     });
+  }
+
+  private isEmailExist(email: string): Observable<boolean> {
+    const isExists = email === 'test@test.test';
+
+    return of(isExists);
   }
 }

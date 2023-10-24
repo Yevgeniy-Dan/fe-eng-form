@@ -64,6 +64,18 @@
         "adsf"
       ],
       "id": "_z4y9WR"
+    },
+    {
+      "name": "sdf",
+      "lastname": "sdf",
+      "birthDate": "2023-10-11T21:00:00.000Z",
+      "technology": "angular",
+      "techVersion": "1.1.1",
+      "email": "adf@ser",
+      "hobbies": [
+        "aasdf"
+      ],
+      "id": "LYBzV-V"
     }
   ]
 }
