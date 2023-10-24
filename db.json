@@ -76,6 +76,18 @@
         "aasdf"
       ],
       "id": "LYBzV-V"
+    },
+    {
+      "name": "aaaaaaa",
+      "lastname": "aaasdf",
+      "birthDate": "2023-10-05T21:00:00.000Z",
+      "technology": "react",
+      "techVersion": "3.2.4",
+      "email": "asdfa2@wswww",
+      "hobbies": [
+        "asdf"
+      ],
+      "id": "4MqL18E"
     }
   ]
 }

@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -7,7 +7,15 @@ import {
   NgForm,
 } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { Observable, first, of } from 'rxjs';
+import {
+  Observable,
+  Subject,
+  concatMap,
+  first,
+  of,
+  switchMap,
+  takeUntil,
+} from 'rxjs';
 
 import { UserService } from 'src/app/services/user.service';
 
@@ -17,7 +25,9 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './engineer-form.component.html',
   styleUrls: ['./engineer-form.component.css'],
 })
-export class EngineerFormComponent {
+export class EngineerFormComponent implements OnDestroy {
+  /**used for unsubscribing from observables */
+  private formUnsubscribe$: Subject<void> = new Subject<void>();
   /** reference to the form container html element */
   @ViewChild('myForm', { static: false }) formDirective?: FormGroupDirective;
   /** Array of technology choices */
@@ -48,6 +58,11 @@ export class EngineerFormComponent {
 
   constructor(private fb: FormBuilder, private userService: UserService) {}
 
+  ngOnDestroy(): void {
+    this.formUnsubscribe$.next();
+    this.formUnsubscribe$.complete();
+  }
+
   /**Getter used for the 'hobbies' items */
   get hobbies(): FormArray {
     return this.engineerForm.get('hobbies') as FormArray;
@@ -74,26 +89,26 @@ export class EngineerFormComponent {
   /**Add a user by sending the form data to the json-server API */
   addUser(): void {
     const email = this.engineerForm.get('email')?.value;
-    this.isEmailExist(email)
-      .pipe(first())
-      .subscribe((isExists) => {
+    const result = this.isEmailExist(email).pipe(
+      switchMap((isExists: boolean) => {
         if (isExists) {
-          this.engineerForm
-            .get('email')
-            ?.setErrors({
-              isExists: 'User with the same email already exists.',
-            });
+          this.engineerForm.get('email')?.setErrors({
+            isExists: 'User with the same email already exists.',
+          });
+          return of(null);
         } else {
-          this.userService
+          return this.userService
             .addUser(this.engineerForm.value)
-            .pipe(first())
-            .subscribe(() => {
-              // reset form to initial state
-              this.formDirective?.resetForm();
-              this.resetHobbiesToInitialState();
-            });
+            .pipe(first());
         }
-      });
+      }),
+      takeUntil(this.formUnsubscribe$)
+    );
+    result.subscribe(() => {
+      // reset form to initial state
+      this.formDirective?.resetForm();
+      this.resetHobbiesToInitialState();
+    });
   }
 
   /**Resets the 'hobbies' section of the form to its initial state */
