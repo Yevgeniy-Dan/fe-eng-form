@@ -99,7 +99,6 @@ export class EngineerFormComponent implements OnDestroy {
         } else {
           return this.userService
             .addUser(this.engineerForm.value)
-            .pipe(first());
         }
       }),
       takeUntil(this.formUnsubscribe$)
