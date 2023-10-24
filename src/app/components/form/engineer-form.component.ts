@@ -1,21 +1,12 @@
-import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
+import { Component, ViewChild, OnDestroy } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
   FormGroup,
   FormGroupDirective,
-  NgForm,
 } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import {
-  Observable,
-  Subject,
-  concatMap,
-  first,
-  of,
-  switchMap,
-  takeUntil,
-} from 'rxjs';
+import { Observable, Subject, of, switchMap, takeUntil } from 'rxjs';
 
 import { UserService } from 'src/app/services/user.service';
 
@@ -97,8 +88,7 @@ export class EngineerFormComponent implements OnDestroy {
           });
           return of(null);
         } else {
-          return this.userService
-            .addUser(this.engineerForm.value)
+          return this.userService.addUser(this.engineerForm.value);
         }
       }),
       takeUntil(this.formUnsubscribe$)
