@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { delay, map } from 'rxjs/operators';
 
 import { User } from '../models/User';
 
@@ -34,5 +34,14 @@ export class UserService {
    */
   addUser(user: User): Observable<User> {
     return this.http.post<User>(this.apiUrl, user, httpOptions);
+  }
+
+  /**checks if the email is 'test@test.test'  */
+  isEmailExist(email: string): Observable<boolean> {
+    const isExists = email === 'test@test.test';
+
+    const response = of(isExists);
+
+    return response;
   }
 }

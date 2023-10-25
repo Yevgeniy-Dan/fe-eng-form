@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { EngineerFormComponent } from './components/form/engineer-form.component';
+import { EmailValidator } from './validators/email-validator';
 
 @NgModule({
   declarations: [AppComponent, EngineerFormComponent],
@@ -31,7 +32,7 @@ import { EngineerFormComponent } from './components/form/engineer-form.component
     MatButtonModule,
     MatIconModule,
   ],
-  providers: [],
+  providers: [EmailValidator],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

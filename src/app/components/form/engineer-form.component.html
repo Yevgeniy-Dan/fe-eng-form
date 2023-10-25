@@ -97,6 +97,9 @@
           formControlName="email"
           placeholder="Ex. pat@example.com"
         />
+        <mat-error *ngIf="engineerForm.get('email')?.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
         <mat-error
           *ngIf="
             engineerForm.get('email')?.hasError('email') &&
@@ -105,11 +108,10 @@
         >
           Please enter a valid email address
         </mat-error>
-        <mat-error *ngIf="engineerForm.get('email')?.hasError('required')">
-          Email is <strong>required</strong>
-        </mat-error>
-        <mat-error *ngIf="engineerForm.get('email')?.hasError('isExists')">
-          {{ engineerForm.get("email")?.getError("isExists") }}
+        <mat-error
+          *ngIf="engineerForm.get('email')?.hasError('emailAlreadyExists')"
+        >
+          User with the same email already exists.
         </mat-error>
       </mat-form-field>
 

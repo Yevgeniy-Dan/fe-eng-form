@@ -6,9 +6,10 @@ import {
   FormGroupDirective,
 } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { Observable, Subject, of, switchMap, takeUntil } from 'rxjs';
+import { Subject } from 'rxjs';
 
 import { UserService } from 'src/app/services/user.service';
+import { EmailValidator } from 'src/app/validators/email-validator';
 
 /** The component is responsible for adding fields to the form and sending the form to the server*/
 @Component({
@@ -43,11 +44,19 @@ export class EngineerFormComponent implements OnDestroy {
     birthDate: ['', Validators.required],
     technology: ['', Validators.required],
     techVersion: [{ value: '', disabled: true }, Validators.required],
-    email: ['', [Validators.required, Validators.email]],
+    email: [
+      '',
+      [Validators.required, Validators.email],
+      [this.emailValidator.validate.bind(this.emailValidator)],
+    ],
     hobbies: this.fb.array([this.fb.control('', Validators.required)]),
   });
 
-  constructor(private fb: FormBuilder, private userService: UserService) {}
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private emailValidator: EmailValidator
+  ) {}
 
   ngOnDestroy(): void {
     this.formUnsubscribe$.next();
@@ -79,37 +88,19 @@ export class EngineerFormComponent implements OnDestroy {
 
   /**Add a user by sending the form data to the json-server API */
   addUser(): void {
-    const email = this.engineerForm.get('email')?.value;
-    const result = this.isEmailExist(email).pipe(
-      switchMap((isExists: boolean) => {
-        if (isExists) {
-          this.engineerForm.get('email')?.setErrors({
-            isExists: 'User with the same email already exists.',
-          });
-          return of(null);
-        } else {
-          return this.userService.addUser(this.engineerForm.value);
-        }
-      }),
-      takeUntil(this.formUnsubscribe$)
-    );
-    result.subscribe(() => {
+    this.userService.addUser(this.engineerForm.value).subscribe(() => {
       // reset form to initial state
       this.formDirective?.resetForm();
-      this.resetHobbiesToInitialState();
+      this.resetFormToInitialState();
     });
   }
 
-  /**Resets the 'hobbies' section of the form to its initial state */
-  private resetHobbiesToInitialState(): void {
+  /**Resets the 'hobbies' and 'techVersion' sections of the form to its initial state */
+  private resetFormToInitialState(): void {
     this.engineerForm = this.fb.group({
+      technology: ['', Validators.required],
+      techVersion: [{ value: '', disabled: true }, Validators.required],
       hobbies: this.fb.array([this.fb.control('', Validators.required)]),
     });
-  }
-
-  private isEmailExist(email: string): Observable<boolean> {
-    const isExists = email === 'test@test.test';
-
-    return of(isExists);
   }
 }
