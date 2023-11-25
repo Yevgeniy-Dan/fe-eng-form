@@ -23,11 +23,6 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  /**Get the list of users from server */
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.apiUrl);
-  }
-
   /**Add the user to db
    * @param user  - user data
    * @returns {Observable<User>} - observable that emits the added user data
@@ -40,8 +35,6 @@ export class UserService {
   isEmailExist(email: string): Observable<boolean> {
     const isExists = email === 'test@test.test';
 
-    const response = of(isExists);
-
-    return response;
+    return of(isExists);
   }
 }
