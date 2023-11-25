@@ -1,0 +1,115 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "John",
+      "lastname": "Doe",
+      "birthDate": "1990-01-15",
+      "technology": "Angular",
+      "techVersion": "v12.0.0",
+      "email": "johndoe@example.com",
+      "hobbies": [
+        "Cycling",
+        "Hiking",
+        "Cooking"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Alice",
+      "lastname": "Smith",
+      "birthDate": "1985-07-20",
+      "technology": "React",
+      "techVersion": "v17.0.0",
+      "email": " test@test.test",
+      "hobbies": [
+        "Painting"
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Michael",
+      "lastname": "Johnson",
+      "birthDate": "1980-12-05",
+      "technology": "Vue",
+      "techVersion": "v3.0.0",
+      "email": "michael@example.com",
+      "hobbies": [
+        "Skiing",
+        "Photography"
+      ]
+    },
+    {
+      "name": "dfg",
+      "lastname": "dfg",
+      "birthDate": "2023-10-04T21:00:00.000Z",
+      "technology": "react",
+      "techVersion": "2.1.2",
+      "email": "sadf@erwer",
+      "hobbies": [
+        "sadf"
+      ],
+      "id": "o47OcJD"
+    },
+    {
+      "name": "sdf",
+      "lastname": "sdf",
+      "birthDate": "2023-10-11T21:00:00.000Z",
+      "technology": "angular",
+      "techVersion": "1.1.1",
+      "email": "asdf@ewe",
+      "hobbies": [
+        "sdaf"
+      ],
+      "id": "bmD_7tS"
+    },
+    {
+      "name": "sdfg",
+      "lastname": "sdfg",
+      "birthDate": "2023-10-05T21:00:00.000Z",
+      "technology": "react",
+      "techVersion": "2.1.2",
+      "email": "df#@ererr",
+      "hobbies": [
+        "sdfg"
+      ],
+      "id": "xG5oQZm"
+    },
+    {
+      "name": "sadf",
+      "lastname": "sadf",
+      "birthDate": "2023-10-04T21:00:00.000Z",
+      "technology": "angular",
+      "techVersion": "1.1.1",
+      "email": "sadf@www",
+      "hobbies": [
+        "asdf"
+      ],
+      "id": "aBBX7Gt"
+    },
+    {
+      "name": "asdf",
+      "lastname": "asdf",
+      "birthDate": "2023-10-03T21:00:00.000Z",
+      "technology": "react",
+      "techVersion": "2.1.2",
+      "email": "test@test.dfs",
+      "hobbies": [
+        "dsfsdf"
+      ],
+      "id": "RYkEb1b"
+    },
+    {
+      "name": "dfsdf",
+      "lastname": "sdf",
+      "birthDate": "2023-10-11T21:00:00.000Z",
+      "technology": "react",
+      "techVersion": "2.1.2",
+      "email": "asdf@eee",
+      "hobbies": [
+        "asdf"
+      ],
+      "id": "kj6GeUU"
+    }
+  ]
+}

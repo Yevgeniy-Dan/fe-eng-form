@@ -1,0 +1,13 @@
+.card-container {
+  max-width: 500px;
+  margin: 30px auto;
+  overflow: auto;
+  min-height: 300px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.hobbie-container button {
+  margin-bottom: 20px;
+}
